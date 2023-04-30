@@ -1,4 +1,5 @@
 // Components
+import { Post } from '../Post'
 import { Header } from '../Header'
 import { SideBar } from '../SideBar'
 
@@ -14,7 +15,9 @@ export const Layout = () => {
         <SideBar />
 
         <main>
-          <p>main</p>
+          <Post />
+
+          <Post />
         </main>
       </WrapperSC>
     </>
