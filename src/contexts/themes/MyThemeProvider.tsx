@@ -9,7 +9,8 @@ import dark from '../../styles/themes/dark'
 import light from '../../styles/themes/light'
 
 // Types
-import { IChildrenToContext, ThemeType } from '../../utilityTypes'
+import { ThemeType } from '../../@types/styled'
+import { IChildrenToContext } from '../../utilityTypes'
 
 export const MyThemeProvider = ({ children }: IChildrenToContext) => {
   const [themes, setThemes] = useState<ThemeType>(dark)
