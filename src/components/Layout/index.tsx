@@ -1,15 +1,22 @@
-// Packages
-import { Outlet } from 'react-router-dom'
+// Components
+import { Header } from '../Header'
+import { SideBar } from '../SideBar'
 
 // Styles
-import { ContainerSC } from './layoutStyles'
+import { WrapperSC } from './layoutStyles'
 
 export const Layout = () => {
   return (
-    <ContainerSC>
-      <h1>Header</h1>
+    <>
+      <Header />
 
-      <Outlet />
-    </ContainerSC>
+      <WrapperSC>
+        <SideBar />
+
+        <main>
+          <p>main</p>
+        </main>
+      </WrapperSC>
+    </>
   )
 }

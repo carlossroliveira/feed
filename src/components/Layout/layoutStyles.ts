@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-export const ContainerSC = styled.section`
+export const WrapperSC = styled.div`
+  max-width: 70rem;
+  margin: 2rem auto;
+  padding: 0 1ren;
+
   display: grid;
   gap: 2rem;
-
-  grid-template-columns: 350px 5fr 1fr;
-  grid-template-rows: 70px 1fr 1fr 100px;
-  grid-template-areas:
-    'header'
-    'sidebar';
+  align-items: flex-start;
+  grid-template-columns: 256px 1fr;
 `
