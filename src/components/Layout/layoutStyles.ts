@@ -9,4 +9,10 @@ export const WrapperSC = styled.div`
   gap: 2rem;
   align-items: flex-start;
   grid-template-columns: 256px 1fr;
+
+  @media (max-width: 768px) {
+    font-size: 87.5%;
+
+    grid-template-columns: 1fr;
+  }
 `

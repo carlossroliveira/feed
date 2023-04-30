@@ -16,7 +16,6 @@ export const GlobalStyle = createGlobalStyle`
  box-shadow: 0 0 0 2px ${({ theme }) => theme.GREEN_SCALE[500]};
 }
 
-
 body, input, texarea, button {
   font-size: 1rem;
   font-weight: 400;
