@@ -1,15 +1,24 @@
+// Components
+import { Avatar } from '../Avatar'
+import { Comment } from '../Comment'
+
 // Styles
 import {
   AuthorSC,
+  ButtonFormSC,
+  CommentListSC,
   ContainerSC,
   ContentSC,
   DivSC,
+  FooterFormSC,
+  FormSC,
   HeaderSC,
-  ImgSC,
   LinkSC,
   ParagraphSC,
   SpanSC,
+  StrongFormSC,
   StrongSC,
+  TextAreaSC,
   TimeSC,
 } from './postStyles'
 
@@ -18,10 +27,7 @@ export const Post = () => {
     <ContainerSC>
       <HeaderSC>
         <AuthorSC>
-          <ImgSC
-            alt="Imagem de perfil do github"
-            src="https://github.com/carlossroliveira.png"
-          />
+          <Avatar src="https://github.com/carlossroliveira.png" />
 
           <DivSC>
             <StrongSC>Carlos Oliveira</StrongSC>
@@ -50,6 +56,22 @@ export const Post = () => {
           <LinkSC href="#">#novoprojeto #nlw #rocketseat</LinkSC>
         </ParagraphSC>
       </ContentSC>
+
+      <FormSC>
+        <StrongFormSC>Deixe seu feedback</StrongFormSC>
+
+        <TextAreaSC placeholder="Deixe um comentário" />
+
+        <FooterFormSC>
+          <ButtonFormSC type="submit">Publicar</ButtonFormSC>
+        </FooterFormSC>
+      </FormSC>
+
+      <CommentListSC>
+        <Comment />
+
+        <Comment />
+      </CommentListSC>
     </ContainerSC>
   )
 }

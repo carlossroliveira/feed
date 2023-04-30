@@ -16,8 +16,6 @@ export const Layout = () => {
 
         <main>
           <Post />
-
-          <Post />
         </main>
       </WrapperSC>
     </>

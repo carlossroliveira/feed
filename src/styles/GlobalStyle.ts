@@ -11,22 +11,18 @@ export const GlobalStyle = createGlobalStyle`
   -webkit-font-smoothing: antialiased;
 }
 
-::root {
-  font-size: 62.5%;
-}
-  
 :focus {
  outline: transparent;
- box-shadow: 0 0 0 2px #333;
+ box-shadow: 0 0 0 2px ${({ theme }) => theme.GREEN_SCALE[500]};
 }
 
 
 body, input, texarea, button {
+  font-size: 1rem;
   font-weight: 400;
-  font-size: 1.6rem;
   font-family: 'Roboto', sans-serif;
 
-  color: ${(props) => props.theme.GREY_SCALE[300]};
-  background-color: ${(props) => props.theme.GREY_SCALE[900]};
+  color: ${({ theme }) => theme.GRAY_SCALE[300]};
+  background-color: ${({ theme }) => theme.GRAY_SCALE[900]};
 }
 `

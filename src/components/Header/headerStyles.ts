@@ -6,7 +6,7 @@ export const HeaderSC = styled.header`
 
   padding: 1.25rem 0;
 
-  background-color: ${({ theme }) => theme.GREY_SCALE[800]};
+  background-color: ${({ theme }) => theme.GRAY_SCALE[800]};
 `
 
 export const ImgSC = styled.img`

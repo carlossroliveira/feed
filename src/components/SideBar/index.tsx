@@ -1,9 +1,11 @@
 // Packages
 import { PencilLine } from 'phosphor-react'
 
+// Components
+import { Avatar } from '../Avatar'
+
 // Styles
 import {
-  AvatarSC,
   FooterSC,
   ImgSC,
   LinkSC,
@@ -22,10 +24,8 @@ export const SideBar = () => {
       />
 
       <ProfileSC>
-        <AvatarSC
-          alt="Imagem de perfil do github"
-          src="https://github.com/carlossroliveira.png"
-        />
+        <Avatar src="https://github.com/carlossroliveira.png" />
+
         <StrongSC>Carlos Oliveira</StrongSC>
         <SpanSC>Web Develop</SpanSC>
       </ProfileSC>

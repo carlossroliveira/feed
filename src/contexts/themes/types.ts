@@ -1,5 +1,5 @@
 // Types
-import { ThemeType } from '../../utilityTypes'
+import { ThemeType } from '../../@types/styled'
 
 export interface IThemeContext {
   themes: ThemeType

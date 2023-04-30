@@ -1,7 +1,7 @@
 export default {
   title: 'dark',
 
-  GREY_SCALE: {
+  GRAY_SCALE: {
     100: '#e1e1e6',
     300: '#c4c4cc',
     400: '#8d8d99',
