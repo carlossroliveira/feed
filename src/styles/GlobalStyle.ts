@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 }
   
 :focus {
- outline: 0;
+ outline: transparent;
  box-shadow: 0 0 0 2px #333;
 }
 
@@ -25,5 +25,8 @@ body, input, texarea, button {
   font-weight: 400;
   font-size: 1.6rem;
   font-family: 'Roboto', sans-serif;
+
+  color: ${(props) => props.theme.GREY_SCALE[300]};
+  background-color: ${(props) => props.theme.GREY_SCALE[900]};
 }
 `

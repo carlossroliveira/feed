@@ -8,8 +8,5 @@ export const ContainerSC = styled.section`
   grid-template-rows: 70px 1fr 1fr 100px;
   grid-template-areas:
     'header'
-    'sidebar'
-    'footer';
-
-  color: ${(props) => props.theme.GREEN_SCALE[300]};
+    'sidebar';
 `
