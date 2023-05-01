@@ -1,4 +1,3 @@
-// Types
 import { ThemeType } from '../../@types/styled'
 
 export interface IThemeContext {
