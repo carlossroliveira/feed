@@ -1,8 +1,11 @@
 // Packages
-import { PencilLine } from 'phosphor-react'
+import { Moon, Sun } from 'phosphor-react'
 
 // Components
 import { Avatar } from '../Avatar'
+
+// Context
+import { useMyTheme } from '../../contexts/themes/useMyTheme'
 
 // Styles
 import {
@@ -16,6 +19,8 @@ import {
 } from './sideBarStyles'
 
 export const SideBar = () => {
+  const { handleThemes, themes } = useMyTheme()
+
   return (
     <SideBarSC>
       <ImgSC
@@ -31,9 +36,9 @@ export const SideBar = () => {
       </ProfileSC>
 
       <FooterSC>
-        <LinkSC href="#">
-          <PencilLine size={20} />
-          Editar seu perfil
+        <LinkSC href="#" onClick={() => handleThemes()}>
+          {themes.title === 'light' ? <Sun size={20} /> : <Moon size={20} />}
+          Mudar tema
         </LinkSC>
       </FooterSC>
     </SideBarSC>

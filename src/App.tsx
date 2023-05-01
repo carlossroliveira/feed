@@ -1,5 +1,5 @@
 // Context
-import { useTheme } from './contexts/themes/useTheme'
+import { useMyTheme } from './contexts/themes/useMyTheme'
 
 // Router
 import { DefaultRouter } from './Router'
@@ -9,7 +9,7 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyle } from './styles/GlobalStyle'
 
 export const App = () => {
-  const { themes } = useTheme()
+  const { themes } = useMyTheme()
 
   return (
     <ThemeProvider theme={themes}>
