@@ -4,7 +4,7 @@ import { Header } from '../Header'
 import { SideBar } from '../SideBar'
 
 // Styles
-import { MainSC, WrapperSC } from './layoutStyles'
+import { WrapperSC } from './layoutStyles'
 
 // Types
 import { posts } from '../../utilityTypes/mock'
@@ -12,16 +12,16 @@ import { posts } from '../../utilityTypes/mock'
 export const Layout = () => {
   return (
     <>
-      <WrapperSC>
-        <Header />
+      <Header />
 
+      <WrapperSC>
         <SideBar />
 
-        <MainSC>
+        <main>
           {posts?.map((element) => (
             <Post key={element.id} post={element} />
           ))}
-        </MainSC>
+        </main>
       </WrapperSC>
     </>
   )
