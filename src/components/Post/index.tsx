@@ -1,11 +1,20 @@
 // Packages
-import ptBR from 'date-fns/locale/pt-BR'
-import { format, formatDistanceToNow } from 'date-fns'
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 // Components
 import { Avatar } from '../Avatar'
 import { Comment } from '../Comment'
+
+// Functions
+import {
+  deleteComment,
+  isCommentTextEmpty,
+  formatPublishedDate,
+  handleCrateNewComment,
+  handleNewCommentChange,
+  handleNewCommentInvalid,
+  publishedDateRelativeToNow,
+} from './functions'
 
 // Styles
 import {
@@ -41,46 +50,33 @@ export const Post = (post: PostProps) => {
 
   const [newCommentText, setNewCommentText] = useState<string>('')
 
-  const publishedDateFormatted = format(
-    publishedAt,
-    "d 'de' LLLL 'às' HH:mm'h'",
-    {
-      locale: ptBR,
-    },
+  const memoizedContent = useMemo(
+    () =>
+      content?.map((line) =>
+        line.type === 'paragraph' ? (
+          <ParagraphSC key={line.content}>{line.content}</ParagraphSC>
+        ) : (
+          <ParagraphSC key={line.content}>
+            <LinkSC href="#">{line.content}</LinkSC>
+          </ParagraphSC>
+        ),
+      ),
+    [content],
   )
 
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
-    locale: ptBR,
-    addSuffix: true,
-  })
-
-  const handleCrateNewComment = (event: FormEvent) => {
-    event.preventDefault()
-
-    setComments([...comments, newCommentText])
-    setNewCommentText('')
-  }
-
-  const handleNewCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    event.target.setCustomValidity('')
-    setNewCommentText(event.target.value)
-  }
-
-  const handleNewCommentInvalid = (
-    event: InvalidEvent<HTMLTextAreaElement>,
-  ) => {
-    event.target.setCustomValidity('Esse campo é obrigatório!')
-  }
-
-  const deleteComment = (commentToDelete: string) => {
-    const commentsWithoutDeletedOne = comments.filter(
-      (comment) => comment !== commentToDelete,
-    )
-
-    setComments(commentsWithoutDeletedOne)
-  }
-
-  const isNewCommentEmpty = newCommentText.length === 0
+  const memoizedComments = useMemo(
+    () =>
+      comments?.map((comment) => (
+        <Comment
+          key={comment}
+          content={comment}
+          onDeleteComment={(commentToDelete) =>
+            deleteComment(commentToDelete, comments, setComments)
+          }
+        />
+      )),
+    [comments],
+  )
 
   return (
     <ContainerSC>
@@ -95,26 +91,26 @@ export const Post = (post: PostProps) => {
         </AuthorSC>
 
         <TimeSC
-          title={publishedDateFormatted}
+          title={formatPublishedDate(publishedAt)}
           dateTime={publishedAt.toISOString()}
         >
-          {publishedDateRelativeToNow}
+          {publishedDateRelativeToNow(publishedAt)}
         </TimeSC>
       </HeaderSC>
 
-      <ContentSC>
-        {content?.map((line) =>
-          line.type === 'paragraph' ? (
-            <ParagraphSC key={line.content}>{line.content}</ParagraphSC>
-          ) : (
-            <ParagraphSC key={line.content}>
-              <LinkSC href="#">{line.content}</LinkSC>
-            </ParagraphSC>
-          ),
-        )}
-      </ContentSC>
+      <ContentSC>{memoizedContent}</ContentSC>
 
-      <FormSC onSubmit={handleCrateNewComment}>
+      <FormSC
+        onSubmit={(event) =>
+          handleCrateNewComment(
+            event,
+            comments,
+            newCommentText,
+            setComments,
+            setNewCommentText,
+          )
+        }
+      >
         <StrongFormSC>Deixe seu feedback</StrongFormSC>
 
         <TextAreaSC
@@ -122,26 +118,21 @@ export const Post = (post: PostProps) => {
           name="comment"
           value={newCommentText}
           placeholder="Deixe um comentário"
-          onChange={handleNewCommentChange}
           onInvalid={handleNewCommentInvalid}
+          onChange={(event) => handleNewCommentChange(event, setNewCommentText)}
         />
 
         <FooterFormSC>
-          <ButtonFormSC type="submit" disabled={isNewCommentEmpty}>
+          <ButtonFormSC
+            type="submit"
+            disabled={isCommentTextEmpty(newCommentText)}
+          >
             Publicar
           </ButtonFormSC>
         </FooterFormSC>
       </FormSC>
 
-      <CommentListSC>
-        {comments?.map((comment) => (
-          <Comment
-            key={comment}
-            content={comment}
-            onDeleteComment={deleteComment}
-          />
-        ))}
-      </CommentListSC>
+      <CommentListSC>{memoizedComments}</CommentListSC>
     </ContainerSC>
   )
 }
