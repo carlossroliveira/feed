@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // Components
 import { Layout } from '../components/Layout'
+import { Error } from '../components/Error'
 
 export const DefaultRouter = () => {
   return (
@@ -10,7 +11,7 @@ export const DefaultRouter = () => {
       <Routes>
         <Route path="/" element={<Layout />} />
 
-        <Route path="*" element={<h1>Error</h1>} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   )
