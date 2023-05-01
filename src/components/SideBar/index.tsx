@@ -38,7 +38,7 @@ export const SideBar = () => {
       <FooterSC>
         <LinkSC href="#" onClick={() => handleThemes()}>
           {themes.title === 'light' ? <Sun size={20} /> : <Moon size={20} />}
-          Mudar tema
+          Trocar Tema
         </LinkSC>
       </FooterSC>
     </SideBarSC>
