@@ -21,6 +21,7 @@ export const AuthorSC = styled.div`
   display: flex;
   align-items: center;
 `
+
 export const DivSC = styled.div`
   display: block;
   line-height: 1.6;
@@ -32,6 +33,7 @@ export const StrongSC = styled.strong`
   line-height: 1.6;
   color: ${({ theme }) => theme.GRAY_SCALE[100]};
 `
+
 export const SpanSC = styled.span`
   display: block;
   font-size: 0.875rem;

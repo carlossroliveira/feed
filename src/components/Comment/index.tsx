@@ -4,6 +4,7 @@ import { ThumbsUp, Trash } from 'phosphor-react'
 
 // Components
 import { Avatar } from '../Avatar'
+import { ConfirmDialog } from '../ConfirmDialog'
 
 // Styles
 import {
@@ -26,8 +27,16 @@ import { ICommentProps } from './types'
 export const Comment = ({ content, onDeleteComment }: ICommentProps) => {
   const [likeCount, setLikeCount] = useState<number>(0)
 
+  const [IsOpen, setIsOpen] = useState<boolean>(false)
+
   return (
     <CommentSC>
+      <ConfirmDialog
+        open={IsOpen}
+        onCancel={() => setIsOpen(false)}
+        onConfirm={() => onDeleteComment(content)}
+      />
+
       <Avatar hasBorder={false} src="https://github.com/carlossroliveira.png" />
 
       <DivSC>
@@ -46,7 +55,7 @@ export const Comment = ({ content, onDeleteComment }: ICommentProps) => {
 
             <ButtonSC
               title="Deletar Comentário"
-              onClick={() => onDeleteComment(content)}
+              onClick={() => setIsOpen(true)}
             >
               <Trash size={20} />
             </ButtonSC>

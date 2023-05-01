@@ -2,13 +2,13 @@
 import { Post } from '../Post'
 import { Header } from '../Header'
 import { SideBar } from '../SideBar'
+import { NamePage } from '../NamePage'
 
 // Styles
 import { WrapperSC } from './layoutStyles'
 
 // Types
 import { posts } from '../../utilityTypes/mock'
-import { NamePage } from '../NamePage'
 
 export const Layout = () => {
   return (
