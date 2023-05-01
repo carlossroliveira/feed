@@ -12,3 +12,7 @@ export const HeaderSC = styled.header`
 export const ImgSC = styled.img`
   height: 2rem;
 `
+
+export const TitleSC = styled.h1`
+  margin-left: 1rem;
+`

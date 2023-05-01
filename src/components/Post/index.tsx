@@ -1,3 +1,8 @@
+// Packages
+import ptBR from 'date-fns/locale/pt-BR'
+import { format, formatDistanceToNow } from 'date-fns'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
+
 // Components
 import { Avatar } from '../Avatar'
 import { Comment } from '../Comment'
@@ -22,55 +27,120 @@ import {
   TimeSC,
 } from './postStyles'
 
-export const Post = () => {
+// types
+import { PostProps } from './types'
+
+export const Post = (post: PostProps) => {
+  const {
+    post: { author, content, publishedAt },
+  } = post
+
+  const [comments, setComments] = useState<string[]>([
+    'Post muito bacana, hein?!',
+  ])
+
+  const [newCommentText, setNewCommentText] = useState<string>('')
+
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    {
+      locale: ptBR,
+    },
+  )
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
+
+  const handleCrateNewComment = (event: FormEvent) => {
+    event.preventDefault()
+
+    setComments([...comments, newCommentText])
+    setNewCommentText('')
+  }
+
+  const handleNewCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    event.target.setCustomValidity('')
+    setNewCommentText(event.target.value)
+  }
+
+  const handleNewCommentInvalid = (
+    event: InvalidEvent<HTMLTextAreaElement>,
+  ) => {
+    event.target.setCustomValidity('Esse campo é obrigatório!')
+  }
+
+  const deleteComment = (commentToDelete: string) => {
+    const commentsWithoutDeletedOne = comments.filter(
+      (comment) => comment !== commentToDelete,
+    )
+
+    setComments(commentsWithoutDeletedOne)
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0
+
   return (
     <ContainerSC>
       <HeaderSC>
         <AuthorSC>
-          <Avatar src="https://github.com/carlossroliveira.png" />
+          <Avatar src={author.avatarUrl} />
 
           <DivSC>
-            <StrongSC>Carlos Oliveira</StrongSC>
-            <SpanSC>Web Develop</SpanSC>
+            <StrongSC>{author.name}</StrongSC>
+            <SpanSC>{author.role}</SpanSC>
           </DivSC>
         </AuthorSC>
 
-        <TimeSC title="11 de maio ás 08:13h" dateTime="2023-05-11 08:13:00">
-          Publicando há 1h
+        <TimeSC
+          title={publishedDateFormatted}
+          dateTime={publishedAt.toISOString()}
+        >
+          {publishedDateRelativeToNow}
         </TimeSC>
       </HeaderSC>
 
       <ContentSC>
-        <ParagraphSC>Fala galeraa 👋</ParagraphSC>
-
-        <ParagraphSC>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </ParagraphSC>
-
-        <ParagraphSC>
-          <LinkSC href="#"> 👉 jane.design/doctorcare</LinkSC>
-        </ParagraphSC>
-
-        <ParagraphSC>
-          <LinkSC href="#">#novoprojeto #nlw #rocketseat</LinkSC>
-        </ParagraphSC>
+        {content?.map((line) =>
+          line.type === 'paragraph' ? (
+            <ParagraphSC key={line.content}>{line.content}</ParagraphSC>
+          ) : (
+            <ParagraphSC key={line.content}>
+              <LinkSC href="#">{line.content}</LinkSC>
+            </ParagraphSC>
+          ),
+        )}
       </ContentSC>
 
-      <FormSC>
+      <FormSC onSubmit={handleCrateNewComment}>
         <StrongFormSC>Deixe seu feedback</StrongFormSC>
 
-        <TextAreaSC placeholder="Deixe um comentário" />
+        <TextAreaSC
+          required
+          name="comment"
+          value={newCommentText}
+          placeholder="Deixe um comentário"
+          onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+        />
 
         <FooterFormSC>
-          <ButtonFormSC type="submit">Publicar</ButtonFormSC>
+          <ButtonFormSC type="submit" disabled={isNewCommentEmpty}>
+            Publicar
+          </ButtonFormSC>
         </FooterFormSC>
       </FormSC>
 
       <CommentListSC>
-        <Comment />
-
-        <Comment />
+        {comments?.map((comment) => (
+          <Comment
+            key={comment}
+            content={comment}
+            onDeleteComment={deleteComment}
+          />
+        ))}
       </CommentListSC>
     </ContainerSC>
   )

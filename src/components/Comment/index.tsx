@@ -1,4 +1,5 @@
 // Packages
+import { useState } from 'react'
 import { ThumbsUp, Trash } from 'phosphor-react'
 
 // Components
@@ -19,7 +20,12 @@ import {
   TimeSC,
 } from './commentStyles'
 
-export const Comment = () => {
+// Types
+import { ICommentProps } from './types'
+
+export const Comment = ({ content, onDeleteComment }: ICommentProps) => {
+  const [likeCount, setLikeCount] = useState<number>(0)
+
   return (
     <CommentSC>
       <Avatar hasBorder={false} src="https://github.com/carlossroliveira.png" />
@@ -38,18 +44,21 @@ export const Comment = () => {
               </TimeSC>
             </div>
 
-            <ButtonSC title="Deletar Comentário">
+            <ButtonSC
+              title="Deletar Comentário"
+              onClick={() => onDeleteComment(content)}
+            >
               <Trash size={20} />
             </ButtonSC>
           </HeaderSC>
 
-          <ParagraphSC>Muito bom Dev, parabéns!!</ParagraphSC>
+          <ParagraphSC>{content}</ParagraphSC>
         </CommentContentSC>
 
         <FooterSC>
-          <ButtonFooterSC>
+          <ButtonFooterSC onClick={() => setLikeCount((prev) => prev + 1)}>
             <ThumbsUp />
-            Aplaudir <SpanSC>20</SpanSC>
+            Aplaudir <SpanSC>{likeCount}</SpanSC>
           </ButtonFooterSC>
         </FooterSC>
       </DivSC>

@@ -111,6 +111,15 @@ export const ButtonFormSC = styled.button`
   cursor: pointer;
 
   transition: background-color 0.1s;
+
+  &:not([disabled]):hover {
+    background-color: ${({ theme }) => theme.GREEN_SCALE[300]};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 `
 
 export const CommentListSC = styled.div`
