@@ -1,6 +1,8 @@
 <h1 align="center"> 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Feed </h1>
 
 ---
+![Screenshot_4](https://user-images.githubusercontent.com/63623377/235813179-988e6b07-0e8f-4961-9149-b166b584fd09.png)
+![Screenshot_3](https://user-images.githubusercontent.com/63623377/235813180-aca732e7-47e9-48f0-92dd-1cd3dc84e764.png)
 
 ---
 ## Feed
